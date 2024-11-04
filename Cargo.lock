@@ -382,7 +382,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "cw-vault-standard"
+name = "cw-vault-standard-margined"
 version = "2.0.0"
 dependencies = [
  "cosmwasm-schema",

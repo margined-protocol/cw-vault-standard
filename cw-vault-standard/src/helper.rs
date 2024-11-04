@@ -91,10 +91,7 @@ where
 
         Ok(WasmMsg::Execute {
             contract_addr: self.addr.to_string(),
-            msg: to_json_binary(&VaultStandardExecuteMsg::<E>::Deposit {
-                amount: amount.clone(),
-                recipient,
-            })?,
+            msg: to_json_binary(&VaultStandardExecuteMsg::<E>::Deposit { amount, recipient })?,
             funds: vec![coin(amount.u128(), &self.base_token)],
         }
         .into())
@@ -121,10 +118,7 @@ where
         let amount = amount.into();
         Ok(WasmMsg::Execute {
             contract_addr: self.addr.to_string(),
-            msg: to_json_binary(&VaultStandardExecuteMsg::<E>::Redeem {
-                amount: amount.clone(),
-                recipient,
-            })?,
+            msg: to_json_binary(&VaultStandardExecuteMsg::<E>::Redeem { amount, recipient })?,
             funds: vec![coin(amount.u128(), &self.vault_token)],
         }
         .into())
@@ -150,6 +144,7 @@ where
         since = "0.4.1",
         note = "PreviewDeposit and PreviewRedeem turned out to be too difficult to implement in most cases. We recommend to use transaction simulation from non-contract clients such as frontends."
     )]
+    #[allow(deprecated)]
     /// Queries the vault for a preview of a deposit
     pub fn query_preview_deposit(
         &self,
@@ -168,6 +163,7 @@ where
         since = "0.4.1",
         note = "PreviewDeposit and PreviewRedeem turned out to be too difficult to implement in most cases. We recommend to use transaction simulation from non-contract clients such as frontends."
     )]
+    #[allow(deprecated)]
     /// Queries the vault for a preview of a redeem
     pub fn query_preview_redeem(
         &self,
